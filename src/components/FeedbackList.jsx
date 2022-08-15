@@ -1,10 +1,13 @@
 import { motion, AnimatePresence } from 'framer-motion';
-// import PropTypes from 'react';
+import { useContext } from 'react';
 
 import FeedbackItem from './FeedbackItem';
+import FeedbackContext from '../context/FeedbackContext';
 
 // feedback is working as props, i need to write this prop in app.js
-function FeedbackList({ feedback, handleDelete }) {
+function FeedbackList({ handleDelete }) {
+  const { feedback } = useContext(FeedbackContext);
+
   // we do have a feedback so it wont be displayed. the feedback come from "useState(FeedbackData)"
   if (!feedback || feedback.length === 0) {
     return <p>No Feedback Yet</p>;
@@ -39,15 +42,5 @@ function FeedbackList({ feedback, handleDelete }) {
   //   </div>
   // );
 }
-
-// FeedbackList.propTypes = {
-//   feedback: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       text: PropTypes.string.isRequired,
-//       rating: PropTypes.number.isRequired,
-//     })
-//   )
-// }
 
 export default FeedbackList;
