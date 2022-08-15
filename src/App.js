@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+
 import Header from './components/Header'
 import FeedbackList from './components/FeedbackList'
 import FeedbackData from './data/feedbackData'
@@ -7,6 +9,11 @@ import FeedbackForm from './components/FeedbackForm'
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData)
+
+  const addFeedback = (newFeedback) => {
+    newFeedback.id = uuidv4()
+    setFeedback([newFeedback,...feedback]) //So basically, we're taking all the objects that are already in feedback and putting it into this array and the newFeedback.
+  }
 
   const deleteFeedback = (id) => {
     if (window.confirm('Are your sure you want to delete it?')) {
@@ -19,7 +26,7 @@ function App() {
     <>
       <Header />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback}
           handleDelete={deleteFeedback} />
