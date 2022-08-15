@@ -1,4 +1,4 @@
-import PropTypes from 'react';
+// import PropTypes from 'react';
 
 function Card({ children, reverse }) {
   // return <div className={`card  ${reverse && 'reverse'}`}>
