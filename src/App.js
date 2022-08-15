@@ -12,6 +12,8 @@ function App() {
 
   const addFeedback = (newFeedback) => {
     newFeedback.id = uuidv4()
+    // Spread syntax (...) can be used when all elements from an object or array need to be included in a new array or object,
+    // or should be applied one-by-one in a function call's arguments list. 
     setFeedback([newFeedback,...feedback]) //So basically, we're taking all the objects that are already in feedback and putting it into this array and the newFeedback.
   }
 
