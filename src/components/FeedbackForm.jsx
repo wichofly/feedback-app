@@ -1,15 +1,18 @@
 //  typically when you have a form, you're going to have a piece of state for each input in that form.
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import RatingSelect from './RatingSelect';
 import Card from './shared/Card';
 import Button from './shared/Button';
+import FeedbackContext from '../context/FeedbackContext';
 
-function FeedbackForm({ handleAdd }) {
+function FeedbackForm() {
   const [text, setText] = useState('');
   const [rating, setRating] = useState('6');
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
+
+  const {addFeedback} = useContext(FeedbackContext)
 
   const handleTextChange = (e) => {
     if (text === '') {
@@ -33,8 +36,9 @@ function FeedbackForm({ handleAdd }) {
         text,
         rating, //short way of text: text and rating: rating
       };
-      handleAdd(newFeedback);
-      
+
+      addFeedback(newFeedback);
+
       setText('')
     }
   };

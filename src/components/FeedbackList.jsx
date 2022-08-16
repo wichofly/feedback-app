@@ -5,7 +5,7 @@ import FeedbackItem from './FeedbackItem';
 import FeedbackContext from '../context/FeedbackContext';
 
 // feedback is working as props, i need to write this prop in app.js
-function FeedbackList({ handleDelete }) {
+function FeedbackList() {
   const { feedback } = useContext(FeedbackContext);
 
   // we do have a feedback so it wont be displayed. the feedback come from "useState(FeedbackData)"
@@ -26,7 +26,7 @@ function FeedbackList({ handleDelete }) {
             <FeedbackItem
               key={item.id}
               item={item}
-              handleDelete={handleDelete}
+              
             />
           </motion.div>
         ))}
