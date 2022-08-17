@@ -12,16 +12,17 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
 
-  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedback, feedbackEdit, updateFeedback } =
+    useContext(FeedbackContext);
 
   // we are using useEffect cause whenever click on feedbackEdit we want something happen
   // we want the form to get the text and the rating from the current feedback for that we need side effects
   // the way we deal with side effects with functional and hooks we need "useEffect"
   useEffect(() => {
-    if(feedbackEdit.edit === true) {
-      setBtnDisabled(false)
-      setText(feedbackEdit.item.text)
-      setRating(feedbackEdit.item.rating)
+    if (feedbackEdit.edit === true) {
+      setBtnDisabled(false);
+      setText(feedbackEdit.item.text);
+      setRating(feedbackEdit.item.rating);
     }
   }, [feedbackEdit]);
 
@@ -48,7 +49,11 @@ function FeedbackForm() {
         rating, //short way of text: text and rating: rating
       };
 
-      addFeedback(newFeedback);
+      if (feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback);
+      } else {
+        addFeedback(newFeedback);
+      }
 
       setText('');
     }
