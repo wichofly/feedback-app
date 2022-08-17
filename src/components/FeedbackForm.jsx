@@ -1,5 +1,5 @@
 //  typically when you have a form, you're going to have a piece of state for each input in that form.
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import RatingSelect from './RatingSelect';
 import Card from './shared/Card';
@@ -12,7 +12,18 @@ function FeedbackForm() {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
 
-  const {addFeedback} = useContext(FeedbackContext)
+  const { addFeedback, feedbackEdit } = useContext(FeedbackContext);
+
+  // we are using useEffect cause whenever click on feedbackEdit we want something happen
+  // we want the form to get the text and the rating from the current feedback for that we need side effects
+  // the way we deal with side effects with functional and hooks we need "useEffect"
+  useEffect(() => {
+    if(feedbackEdit.edit === true) {
+      setBtnDisabled(false)
+      setText(feedbackEdit.item.text)
+      setRating(feedbackEdit.item.rating)
+    }
+  }, [feedbackEdit]);
 
   const handleTextChange = (e) => {
     if (text === '') {
@@ -39,7 +50,7 @@ function FeedbackForm() {
 
       addFeedback(newFeedback);
 
-      setText('')
+      setText('');
     }
   };
 

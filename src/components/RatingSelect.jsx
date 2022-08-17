@@ -1,14 +1,22 @@
 // We want to have a piece of state that represents which number is selected.
 // thats why we need useState
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
-function RatingSelect({select}) {
+import FeedbackContext from '../context/FeedbackContext';
+
+function RatingSelect({ select }) {
   const [selected, setSelected] = useState(6);
 
+  const { feedbackEdit } = useContext(FeedbackContext);
+
+  useEffect(() => {
+    setSelected(feedbackEdit.item.rating);
+  }, [feedbackEdit]);
+
   const handleChange = (e) => {
-    setSelected(+e.currentTarget.value)
-    select(selected)
-  }
+    setSelected(+e.currentTarget.value);
+    select(selected);
+  };
 
   return (
     <ul className="rating">
