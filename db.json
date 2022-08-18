@@ -1,24 +1,14 @@
 {
   "feedback": [
     {
-      "id": 1,
-      "rating": 7,
-      "text": "Teting feedback 1 from backend using json-server"
-    },
-    {
       "id": 2,
       "rating": 5,
       "text": "Teting feedback 2 from backend using json-server"
     },
     {
-      "id": 3,
-      "rating": 9,
-      "text": "Teting feedback 3 from backend using json-server"
-    },
-    {
-      "text": "Update last feedback",
-      "rating": "9",
-      "id": 4
+      "text": "Feedback test",
+      "rating": 3,
+      "id": 3
     }
   ]
 }
