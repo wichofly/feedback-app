@@ -16,8 +16,8 @@
       "text": "Teting feedback 3 from backend using json-server"
     },
     {
+      "text": "Update last feedback",
       "rating": "9",
-      "text": "New  Feedback item using post from Postman",
       "id": 4
     }
   ]

@@ -1,12 +1,10 @@
-import { object } from 'prop-types';
 import { createContext, useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
 // In order to get access to our state and our contacts, we are going to wrap everything in a provider.
 export const FeedbackProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [feedback, setFeedback] = useState([]);
 
   const [feedbackEdit, setFeedbackEdit] = useState({
@@ -16,38 +14,58 @@ export const FeedbackProvider = ({ children }) => {
 
   // We are calling it beacuse we want to run this as soon as the page loads, as soon as our context loads.
   useEffect(() => {
-    fetchFeedback()
-  }, [])
+    fetchFeedback();
+  }, []);
 
   // Fetch feedback
   const fetchFeedback = async () => {
-    const response = await fetch('/feedback?_sort=id&_order=desc')
-    const data = await response.json()
+    const response = await fetch('/feedback?_sort=id&_order=desc');
+    const data = await response.json();
 
-    setFeedback(data)
-    setIsLoading(false)
-  }
+    setFeedback(data);
+    setIsLoading(false);
+  };
 
   // Update Feedback item
   // for each  feedback, we are calling an item and then for each one, we want to run a condition (item.id === id) if so,
   // then (?) we want to spread across the current item here and then the update item
-  const updateFeedback = (id, updItem) => {
+  const updateFeedback = async (id, updItem) => {
+    const response = await fetch(`/feedback/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updItem),
+    });
+
+    const data = await response.json()
+
     setFeedback(
-      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+      feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
     );
   };
 
   // Add feedback
-  const addFeedback = (newFeedback) => {
-    newFeedback.id = uuidv4();
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch('/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newFeedback),
+    });
+
+    const data = await response.json();
+
     // Spread syntax (...) can be used when all elements from an object or array need to be included in a new array or object,
     // or should be applied one-by-one in a function call's arguments list.
-    setFeedback([newFeedback, ...feedback]); //So basically, we're taking all the objects that are already in feedback and putting it into this array and the newFeedback.
+    setFeedback([data, ...feedback]); //So basically, we're taking all the objects that are already in feedback and putting it into this array and the newFeedback.
   };
 
   // Delete feedback
-  const deleteFeedback = (id) => {
+  const deleteFeedback = async (id) => {
     if (window.confirm('Are your sure you want to delete it?')) {
+      await fetch(`/feedback/${id}`, { method: 'DELETE' });
       setFeedback(feedback.filter((item) => item.id !== id));
     }
   };
