@@ -1,35 +1,35 @@
-import { createContext, useState } from 'react';
+import { object } from 'prop-types';
+import { createContext, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const FeedbackContext = createContext();
 
 // In order to get access to our state and our contacts, we are going to wrap everything in a provider.
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, setFeedback] = useState([
-    {
-      id: 1,
-      text: 'This is Feedback item 1',
-      rating: 6,
-    },
-    {
-      id: 2,
-      text: 'This is Feedback item 2',
-      rating: 9,
-    },
-    {
-      id: 3,
-      text: 'This is Feedback item 3',
-      rating: 4,
-    },
-  ]);
+  const [isLoading, setIsLoading] = useState(true)
+  const [feedback, setFeedback] = useState([]);
 
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false, // if the edit icon is not clicked it will be set to false
   });
 
+  // We are calling it beacuse we want to run this as soon as the page loads, as soon as our context loads.
+  useEffect(() => {
+    fetchFeedback()
+  }, [])
+
+  // Fetch feedback
+  const fetchFeedback = async () => {
+    const response = await fetch('http://localhost:5000/feedback?_sort=id&_order=desc')
+    const data = await response.json()
+
+    setFeedback(data)
+    setIsLoading(false)
+  }
+
   // Update Feedback item
-  // for each  feedback, we are calling an item and then for each one, we want to run a condition (item.id === id) if so, 
+  // for each  feedback, we are calling an item and then for each one, we want to run a condition (item.id === id) if so,
   // then (?) we want to spread across the current item here and then the update item
   const updateFeedback = (id, updItem) => {
     setFeedback(
@@ -65,6 +65,7 @@ export const FeedbackProvider = ({ children }) => {
       value={{
         feedback,
         feedbackEdit, // Piece of state that holds the item and the boolean
+        isLoading,
         deleteFeedback,
         addFeedback,
         editFeedback, // this is te function that runs when we click this
