@@ -9,6 +9,11 @@
       "text": "Feedback test",
       "rating": 3,
       "id": 3
+    },
+    {
+      "text": "Netlify no soporta json-server",
+      "rating": 3,
+      "id": 4
     }
   ]
 }

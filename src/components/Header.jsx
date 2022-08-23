@@ -14,6 +14,7 @@ function Header({ text, bgColor, textColor }) {
   );
 }
 
+// So now, if nothing is explicitly passed into the header, if no text are B color is passed in, then it's going to use these default props. 
 Header.defaultProps = {
   text: 'Feedback UI',
   bgColor: 'rgba(0,0,0,0.4)',

@@ -5,10 +5,10 @@ import './index.css'
 import App from './App'
 
 const root = ReactDom.createRoot(
-    document.getElementById('root')
+  document.getElementById('root')
 );
 root.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
 );
