@@ -24,6 +24,11 @@
       "text": "Peter performance ",
       "rating": 3,
       "id": 6
+    },
+    {
+      "text": "Isabella show",
+      "rating": 9,
+      "id": 7
     }
   ]
 }
