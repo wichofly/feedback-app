@@ -19,6 +19,11 @@
       "text": "React expireince",
       "rating": 2,
       "id": 5
+    },
+    {
+      "text": "Peter performance ",
+      "rating": 3,
+      "id": 6
     }
   ]
 }
