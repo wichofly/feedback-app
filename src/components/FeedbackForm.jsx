@@ -26,11 +26,14 @@ function FeedbackForm() {
     }
   }, [feedbackEdit]);
 
-  const handleTextChange = ({ target: { value } }) => {  // 👈  get the value
+  // NOTE: This should be checking input value not state as state won't be the updated value until the next render of the component
+  const handleTextChange = ({ target: { value } }) => {
+    // 👈  get the value
     if (value === '') {
       setBtnDisabled(true);
-      setMessage(null)
-    } else if (value.trim().length < 10) {  // 👈 check for less than 10
+      setMessage(null);
+    } else if (value.trim().length < 10) {
+      // 👈 check for less than 10
       setMessage('Text must be at least 10 characters');
       setBtnDisabled(true);
     } else {
@@ -55,8 +58,8 @@ function FeedbackForm() {
       }
 
       // NOTE: reset to default state after submission
-      setBtnDisabled(true) // 👈  add this line to reset disabled
-      setRating(10) //👈 add this line to set rating back to 10
+      setBtnDisabled(true); // 👈  add this line to reset disabled
+      setRating(10); //👈 add this line to set rating back to 10
       setText('');
     }
   };
@@ -66,19 +69,19 @@ function FeedbackForm() {
       <form onSubmit={handleSubmit}>
         <h2>How would you rate your service with us?</h2>
         <RatingSelect select={setRating} selected={rating} />
-        <div className='input-group'>
+        <div className="input-group">
           <input
             onChange={handleTextChange}
-            type='text'
-            placeholder='Write a review'
+            type="text"
+            placeholder="Write a review"
             value={text}
           />
-          <Button type='submit' isDisabled={btnDisabled}>
+          <Button type="submit" isDisabled={btnDisabled}>
             Send
           </Button>
         </div>
 
-        {message && <div className='message'>{message}</div>}
+        {message && <div className="message">{message}</div>}
       </form>
     </Card>
   );
