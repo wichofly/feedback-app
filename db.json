@@ -1,21 +1,6 @@
 {
   "feedback": [
     {
-      "id": 2,
-      "rating": 5,
-      "text": "Teting feedback 2 from backend using json-server"
-    },
-    {
-      "text": "Feedback test",
-      "rating": 3,
-      "id": 3
-    },
-    {
-      "text": "Netlify no soporta json-server",
-      "rating": 3,
-      "id": 4
-    },
-    {
       "text": "React expireince",
       "rating": 2,
       "id": 5
@@ -29,6 +14,11 @@
       "text": "Isabella show",
       "rating": 9,
       "id": 7
+    },
+    {
+      "text": "Well done, thanks a lot for the steak",
+      "rating": 6,
+      "id": 8
     }
   ]
 }
