@@ -19,6 +19,11 @@
       "text": "Well done, thanks a lot for the steak",
       "rating": 6,
       "id": 8
+    },
+    {
+      "text": "Thai Food, so good! We had a great experience eating street Thai food in Munich",
+      "rating": 8,
+      "id": 9
     }
   ]
 }
