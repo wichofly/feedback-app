@@ -12,3 +12,9 @@ root.render(
     <App />
   </React.StrictMode>,
 );
+
+/*
+  - To run de project:
+    - Open one terminal and run "npm start"
+    - Open second terminal and run "npm server"
+*/
